@@ -36,7 +36,7 @@
             <span>Saídas</span>
             <img src="./assets/expense.svg" alt="Imagem de saídas" />
           </h3>
-          <p id="expenseDisplay"></p>
+          <p id="expenseDisplay" class="negative"></p>
         </div>
 
         <div class="card total">
@@ -48,15 +48,34 @@
         </div>
       </section>
 
+      <section id="accounts">
+        <h2 class="sr-only">Contas</h2>
+        <a href="#" class="button new" onclick="Modal.activeModalAccount()"
+          >+ Nova Conta</a
+        >
+        <table id="accounts-table">
+          <thead>
+            <tr>
+              <th>Tipo da Conta</th>
+              <th>Instituição</th>
+              <th>Saldo</th>
+            </tr>
+          </thead>
+          <tbody>            
+          </tbody>
+        </table>
+      </section>
+
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
-        <a href="#" class="button new" onclick="Modal.active()"
+        <a href="#" class="button new" onclick="Modal.activeModalTransaction()"
           >+ Nova Transação</a
         >
         <table id="data-table">
           <thead>
             <tr>
               <th>Descrição</th>
+              <th>Conta</th>
               <th>Valor</th>
               <th>Data</th>
               <th></th>
@@ -67,11 +86,65 @@
       </section>
     </main>
 
-    <div class="modal-overlay">
+    <div class="modal-overlay account">
+      <div class="modal">
+        <div id="form">
+          <h2>Nova Conta</h2>
+          <form action="" onsubmit="FormAccount.submit(event)">
+
+            <div class="input-group">
+              <small class="help">
+                * Após salvar não será possível excluir ou editar!
+              </small>
+              <label class="sr-only" for="typeAccount">Tipo da Conta</label>
+              <select
+                id="typeAccount"
+                name="typeAccount"
+              >
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Conta Corrente">Conta Corrente</option>
+                <option value="Conta Poupança">Conta Poupança</option>
+                <option value="Investimento">Investimento</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label class="sr-only" for="institution">Instituição</label>
+              <input
+                type="text"
+                id="institution"
+                name="institution"
+                placeholder="Instituição"
+              />              
+            </div>
+              <div class="input-group actions">
+                <a href="" class="button cancel" onclick="ModalAccount.active()"
+                  >Cancelar</a
+                >
+                <button type="submit">Salvar</button>                
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay transaction">
       <div class="modal">
         <div id="form">
           <h2>Nova Transação</h2>
-          <form action="" onsubmit="Form.submit(event)">
+          <form action="" onsubmit="FormTransaction.submit(event)">
+
+            <div class="input-group">
+              <label class="sr-only" for="accounts">Conta</label>
+              <select
+                id="accounts"
+                name="accounts"
+              >
+              </select>
+            </div>
+
             <div class="input-group">
               <label class="sr-only" for="description">Descrição</label>
               <input
@@ -90,16 +163,16 @@
                 name="amount"
                 placeholder="0,00"
               />
-              <small class="help"
-                >Use o sinal - (negativo) para despesas e , (virgula) para casas
-                decimais</small
-              >
+              <small class="help">
+                Use o sinal - (negativo) para despesas e , (virgula) para casas
+                decimais
+              </small>
               <div class="input-group">
                 <label class="sr-only" for="date">Data</label>
                 <input type="date" id="date" name="date" placeholder="date" />
               </div>
               <div class="input-group actions">
-                <a href="" class="button cancel" onclick="Modal.active()"
+                <a href="" class="button cancel" onclick="Modal.activeModalTransaction()"
                   >Cancelar</a
                 >
                 <button>Salvar</button>

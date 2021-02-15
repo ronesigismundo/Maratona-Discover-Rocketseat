@@ -129,7 +129,7 @@ header {
     padding: 1.5rem 2rem;
     border-radius: 0.25rem;
 
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: var(--dark-blue)
 }
 
@@ -154,7 +154,11 @@ header {
     color: white;
 }
 
-/* Table -------------*/
+.card .negative {
+    color: #e92929;
+}
+
+/* Table Transactions-------------*/
 #transaction {
     display: block;
     width: 100%;
@@ -210,8 +214,26 @@ td.expense {
     color: #e92929;
 }
 
+/* Table-accounts ----------------*/
+
+#accounts-table {    
+    width: 100%;
+    border-spacing: 0 0.5rem;
+    color: #969cb3;
+    margin-bottom: 2rem;
+}
+
+td.positive {
+    color: #12a454;
+}
+
+td.negative {
+    color: #e92929;
+}
+
 /* Modal -------------*/
-.modal-overlay {
+.modal-overlay.transaction,
+.modal-overlay.account {
     width: 100%;
     height: 100%;
 
@@ -230,7 +252,8 @@ td.expense {
     z-index: 999;
 }
 
-.modal-overlay.active {
+.modal-overlay.transaction.active,
+.modal-overlay.account.active {
     opacity: 1;
     visibility: visible;
 }
@@ -253,7 +276,8 @@ td.expense {
     margin-top: 0;
 }
 
-input {
+input,
+select {
     border: none;
     border-radius: 0.2rem;
 
