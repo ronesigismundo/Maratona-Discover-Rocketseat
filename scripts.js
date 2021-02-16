@@ -11,6 +11,16 @@ const Modal = {
     // Adicionar ou remove a class active ao modal
     Accounts.updateSelect();
     document.querySelector(".modal-overlay.account").classList.toggle("active");
+  },
+
+  activeModalHistoric(accountId) {
+    if(accountId > 0){
+      DOM.innerHTMLHistoricTitle(accountId)
+      Historic.create(accountId)
+    } else {
+      DOM.clearHistoric()
+    }   
+    document.querySelector(".modal-overlay.historic").classList.toggle("active");
   }
 };
 
@@ -153,9 +163,31 @@ const Accounts = {
   }
 }
 
+const Historic = {  
+
+  create(accountId) {
+    let historic = [];      
+    Transaction.all.map(transaction => {     
+      const {description, account, amount, date} = transaction
+      
+      if (Number(account) === Number(accountId) ){
+        historic.push({date: date, description: description, amount: amount})
+      }
+    })
+
+    historic.map(historic => {
+      DOM.addHistoric(historic)
+    })    
+  }
+
+  
+}
+
 const DOM = {
   transactionContainer: document.querySelector('#data-table tbody'),
   accountContainer: document.querySelector('#accounts-table tbody'),
+  historicContainer: document.querySelector('#historic-table tbody'),
+  historicTitle: document.getElementById('historicTitle'),
 
   addTransaction(transaction, index) {
     const tr = document.createElement('tr')
@@ -185,15 +217,16 @@ const DOM = {
     
   },
 
-  addAccount(account, index) {
-    const tr = document.createElement('tr')
-    tr.innerHTML = DOM.innerHTMLAccount(account, index)
-    tr.dataset.index = index 
+  addAccount(account) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = DOM.innerHTMLAccount(account);
+    tr.setAttribute("onclick", `Modal.activeModalHistoric(${account.id})`);
+    tr.classList.add('pointer')
     
-    DOM.accountContainer.appendChild(tr)
+    DOM.accountContainer.appendChild(tr);
   },
 
-  innerHTMLAccount(account, index) {
+  innerHTMLAccount(account) {
     const cssClass = account.balance >= 0 ? "positive" : "negative";
 
     const balance = Utils.formatCurrency(account.balance)
@@ -205,6 +238,33 @@ const DOM = {
     `;
     return html
     
+  },
+
+  addHistoric(historic) {
+    const tr = document.createElement('tr')
+
+    tr.innerHTML = DOM.innerHTMLHistoric(historic)
+
+    DOM.historicContainer.appendChild(tr)
+  },
+
+  innerHTMLHistoric(historic) {
+    const cssClass = historic.amount > 0 ? "income" : "expense";
+
+    const amount = Utils.formatCurrency(historic.amount)
+    
+    const html = `
+            <td class="date">${historic.date}</td>        
+            <td class="description">${historic.description}</td>
+            <td class="${cssClass}">${amount}</td>    
+    `;
+    return html
+    
+  },
+
+  innerHTMLHistoricTitle(accountId) {
+    const { institution } = Accounts.all.find(account => Number(account.id) === Number(accountId))
+    DOM.historicTitle.innerHTML = institution
   },
 
   updateBalance() {
@@ -229,7 +289,13 @@ const DOM = {
 
   clearAccounts() {
     DOM.accountContainer.innerHTML = ""
+  },
+
+  clearHistoric() {
+    DOM.historicContainer.innerHTML = "";
+    DOM.historicTitle.innerHTML = "";
   }
+
 };
 
 const Utils = {

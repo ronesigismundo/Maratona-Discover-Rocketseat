@@ -61,8 +61,7 @@
               <th>Saldo</th>
             </tr>
           </thead>
-          <tbody>            
-          </tbody>
+          <tbody></tbody>
         </table>
       </section>
 
@@ -91,16 +90,12 @@
         <div id="form">
           <h2>Nova Conta</h2>
           <form action="" onsubmit="FormAccount.submit(event)">
-
             <div class="input-group">
               <small class="help">
                 * Após salvar não será possível excluir ou editar!
               </small>
               <label class="sr-only" for="typeAccount">Tipo da Conta</label>
-              <select
-                id="typeAccount"
-                name="typeAccount"
-              >
+              <select id="typeAccount" name="typeAccount">
                 <option value="Dinheiro">Dinheiro</option>
                 <option value="Conta Corrente">Conta Corrente</option>
                 <option value="Conta Poupança">Conta Poupança</option>
@@ -116,14 +111,14 @@
                 id="institution"
                 name="institution"
                 placeholder="Instituição"
-              />              
+              />
             </div>
-              <div class="input-group actions">
-                <a href="" class="button cancel" onclick="ModalAccount.active()"
-                  >Cancelar</a
-                >
-                <button type="submit">Salvar</button>                
-              </div>
+
+            <div class="input-group actions">
+              <a href="" class="button cancel" onclick="Modal.activeModalAccount.active()">
+                Cancelar
+              </a>
+              <button type="submit">Salvar</button>
             </div>
           </form>
         </div>
@@ -135,14 +130,9 @@
         <div id="form">
           <h2>Nova Transação</h2>
           <form action="" onsubmit="FormTransaction.submit(event)">
-
             <div class="input-group">
               <label class="sr-only" for="accounts">Conta</label>
-              <select
-                id="accounts"
-                name="accounts"
-              >
-              </select>
+              <select id="accounts" name="accounts"></select>
             </div>
 
             <div class="input-group">
@@ -172,13 +162,44 @@
                 <input type="date" id="date" name="date" placeholder="date" />
               </div>
               <div class="input-group actions">
-                <a href="" class="button cancel" onclick="Modal.activeModalTransaction()"
+                <a
+                  href=""
+                  class="button cancel"
+                  onclick="Modal.activeModalTransaction()"
                   >Cancelar</a
                 >
                 <button>Salvar</button>
               </div>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay historic">
+      <div class="modal">
+        <div id="historic">
+          <div class="historic-title-container">
+            <h2 id="historicTitle"></h2>
+            <h2> - </h2>
+            <h2>Histórico</h2>
+          </div>
+          
+          <table id="historic-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="input-group actions">
+            <a href="" class="button cancel" onclick="Modal.activeModalHistoric.active()">
+              Fechar
+            </a>
+          </div>
         </div>
       </div>
     </div>

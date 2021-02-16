@@ -231,9 +231,14 @@ td.negative {
     color: #e92929;
 }
 
+tr.pointer {
+    cursor: pointer;
+}
+
 /* Modal -------------*/
 .modal-overlay.transaction,
-.modal-overlay.account {
+.modal-overlay.account,
+.modal-overlay.historic {
     width: 100%;
     height: 100%;
 
@@ -253,7 +258,8 @@ td.negative {
 }
 
 .modal-overlay.transaction.active,
-.modal-overlay.account.active {
+.modal-overlay.account.active,
+.modal-overlay.historic.active {
     opacity: 1;
     visibility: visible;
 }
@@ -267,7 +273,7 @@ td.negative {
 }
 
 
-/* Footer -------------*/
+/* Form -------------*/
 #form {
     max-width: 500px;
 }
@@ -303,6 +309,32 @@ select {
 .input-group.actions .button,
 .input-group.actions button {
     width: 48%;
+}
+
+/* Historic -------------*/
+#historic {
+    max-width: 500px;
+}
+
+#historic h2 {
+    margin-top: 0;
+}
+
+#historic > .actions {
+    justify-content: flex-end;
+}
+
+.historic-title-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.historic-title-container h2:first-child {
+    padding-right: 2rem;
+}
+
+.historic-title-container h2:last-child {
+    padding-left: 2rem;
 }
 
 /* Footer -------------*/
