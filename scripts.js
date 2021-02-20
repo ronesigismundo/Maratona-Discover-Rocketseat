@@ -498,6 +498,7 @@ const FormTransaction = {
     if(type.trim() === "expense" && accountExpense.trim() === "") throw new Error("Por favor, escolhar um tipo de conta")
     if(description.trim() === "") throw new Error("Preencha o campo de descrição")
     if(amount.trim() === "") throw new Error("Preencha o valor")
+    if(amount.trim() <= "0") throw new Error("Preencha o valor corretamente ")
     if(date.trim() === "") throw new Error("Informe a data da transação")
   },
 
