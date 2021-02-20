@@ -73,6 +73,7 @@
         <table id="data-table">
           <thead>
             <tr>
+              <th>Transação</th>
               <th>Descrição</th>
               <th>Conta</th>
               <th>Valor</th>
@@ -87,8 +88,12 @@
 
     <div class="modal-overlay account">
       <div class="modal">
+        <ul class="tabs">
+          <li class="active">                
+            Nova Conta
+          </li>
+        </ul>
         <div id="form">
-          <h2>Nova Conta</h2>
           <form action="" onsubmit="FormAccount.submit(event)">
             <div class="input-group">
               <small class="help">
@@ -99,8 +104,6 @@
                 <option value="Dinheiro">Dinheiro</option>
                 <option value="Conta Corrente">Conta Corrente</option>
                 <option value="Conta Poupança">Conta Poupança</option>
-                <option value="Investimento">Investimento</option>
-                <option value="Cartão de Crédito">Cartão de Crédito</option>
               </select>
             </div>
 
@@ -125,70 +128,19 @@
       </div>
     </div>
 
-    <div class="modal-overlay transaction">
-      <div class="modal">
-        <div id="form">
-          <h2>Nova Transação</h2>
-          <form action="" onsubmit="FormTransaction.submit(event)">
-            <div class="input-group">
-              <label class="sr-only" for="accounts">Conta</label>
-              <select id="accounts" name="accounts"></select>
-            </div>
-
-            <div class="input-group">
-              <label class="sr-only" for="description">Descrição</label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Descrição"
-              />
-            </div>
-            <div class="input-group">
-              <label class="sr-only" for="amount">Valor</label>
-              <input
-                type="number"
-                step="0.01"
-                id="amount"
-                name="amount"
-                placeholder="0,00"
-              />
-              <small class="help">
-                Use o sinal - (negativo) para despesas e , (virgula) para casas
-                decimais
-              </small>
-              <div class="input-group">
-                <label class="sr-only" for="date">Data</label>
-                <input type="date" id="date" name="date" placeholder="date" />
-              </div>
-              <div class="input-group actions">
-                <a
-                  href=""
-                  class="button cancel"
-                  onclick="Modal.activeModalTransaction()"
-                  >Cancelar</a
-                >
-                <button>Salvar</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
     <div class="modal-overlay historic">
       <div class="modal">
-        <div id="historic">
-          <div class="historic-title-container">
-            <h2 id="historicTitle"></h2>
-            <h2> - </h2>
-            <h2>Histórico</h2>
-          </div>
-          
+        <ul class="tabs">
+          <li class="active">
+            <span id="historicTitle"></span>
+          </li>
+        </ul>
+        <div id="historic">          
           <table id="historic-table">
             <thead>
               <tr>
                 <th>Data</th>
+                <th>Transação</th>
                 <th>Descrição</th>
                 <th>Valor</th>
               </tr>
@@ -203,6 +155,53 @@
         </div>
       </div>
     </div>
+
+    <div class="modal-overlay transaction">
+      <div class="modal">
+        <ul class="tabs">
+          <li id="tab-income">
+            <a  class="active-link"
+                onclick="DOM.createTransactionForm('income')"
+                href="#" 
+                data-tab="income"
+            >Entrada</a>
+          </li>
+          <li id="tab-expense">
+            <a  class="active-link"
+                onclick="DOM.createTransactionForm('expense')"
+                href="#" 
+                data-tab="expense"
+            >Saída</a>
+          </li>
+          <li id="tab-transfer">
+            <a  class="active-link"
+                onclick="DOM.createTransactionForm('transfer')"
+                href="#" 
+                data-tab="transfer"
+            >Transfência</a>
+          </li>
+        </ul>
+        <div id="form">
+          <!--<h2>Nova Transação</h2>-->
+          
+            <form id="" action="" onsubmit="FormTransaction.submit(event)">
+              <div class="form-body">
+              </div>
+              <div class="form-footer">
+                <div class="input-group actions">
+                  <a
+                    href=""
+                    class="button cancel"
+                    onclick="Modal.activeModalTransaction()"
+                    >Cancelar</a
+                  >
+                  <button>Salvar</button>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>    
 
     <footer>
       <p>dev.finance$</p>

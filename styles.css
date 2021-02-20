@@ -4,6 +4,8 @@
     --green: #49aa26;
     --light-green: #3dd705;
     --red: #e92929;
+    --dark-green: #2d4a22;
+    --dark-green-opacity: #2d4a22f1;
 }
 * {
     margin: 0;
@@ -103,7 +105,7 @@ button:hover {
 
 /* Header -------------*/
 header { 
-    background: #2d4a22;
+    background: var(--dark-green);
     padding: 2rem 0 10rem;
     text-align: center;
 }
@@ -213,6 +215,9 @@ td.income {
 td.expense {
     color: #e92929;
 }
+td.transfer {
+    color: #2986e9;
+}
 
 /* Table-accounts ----------------*/
 
@@ -265,21 +270,73 @@ tr.pointer {
 }
 
 .modal {
-    background: #f0f2f5;
-    padding: 2.4rem;
+    background: var(--dark-green-opacity);
+    padding: 0.4rem;
+    border-radius: 0.25rem;
 
     position: relative;
     z-index: 1;
+}
+
+.modal .tabs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.modal .tabs li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 1rem 0 0;
+  padding: .50rem 1rem .50rem 1rem;
+  background: #f9fafb40;
+  text-align: center;  
+  
+  transition: 0.2s all;
+  position: relative;
+
+  border: 1px 0 0 0 solid var(--green);
+  border-radius: .5rem .5rem 0 0;
+}
+
+.modal .tabs li.active {
+  background: #f0f2f5;
+}
+/*
+.modal .tabs li:hover {
+  background: #f0f2f5;
+}
+*/
+
+.modal .tabs li a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.3);
 }
 
 
 /* Form -------------*/
 #form {
     max-width: 500px;
+    background: #f0f2f5;
+    border-radius:  0 0.25rem 0.25rem 0.25rem;
+    padding: .1rem 2rem 2rem 2rem;
+    
 }
 
 #form h2 {
     margin-top: 0;
+}
+
+#form-income,
+#form-expense,
+#form-transfer {
+  display: none;
+  position: relative;
 }
 
 input,
@@ -313,7 +370,10 @@ select {
 
 /* Historic -------------*/
 #historic {
-    max-width: 500px;
+  max-width: 500px;
+  background: #f0f2f5;
+  border-radius:  0 0.25rem 0.25rem 0.25rem;
+  padding: .1rem 2rem 2rem 2rem;
 }
 
 #historic h2 {
@@ -322,19 +382,6 @@ select {
 
 #historic > .actions {
     justify-content: flex-end;
-}
-
-.historic-title-container {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.historic-title-container h2:first-child {
-    padding-right: 2rem;
-}
-
-.historic-title-container h2:last-child {
-    padding-left: 2rem;
 }
 
 /* Footer -------------*/
